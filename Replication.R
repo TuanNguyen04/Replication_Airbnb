@@ -15,7 +15,6 @@ library(CLmisc) # For reducing felm object size
 df <- read_dta("D:\\My workshop\\PhD\\Teaching\\2021_Workflow of statistical analysis in R\\Laouenan_Rathelot_2020\\data\\base_airbnb_AEJ.dta")
 df <- df %>% filter(active_listing=="1")
 df <- df %>% mutate(sqrev100 = rev100^2)
-df <- df %>% mutate(lastrat78 = lastrat7 + lastrat8)
 df <- df %>% mutate(sample_black = ifelse(mino == 4 | mino == 5, 1, 0))
 df <- df %>% mutate(sample_arabic = ifelse(mino == 2 | mino == 3, 1, 0))
 df <- df %>% mutate(uscan = us + can)
@@ -394,6 +393,78 @@ model5.37 <- felm( formula = log_price ~ lastrat7:rev100 + lastrat8:rev100 + las
 model5.37s <- reduce_felm_object_size(model5.37)
 rm(model5.37);gc()
 
+# K < 100 incl. K = 0
+model5.38 <- felm( formula = log_price ~ lastrat7:rev100 + lastrat8:rev100 + lastrat9:rev100 + lastrat10:rev100 + minodummy:rev100 + 
+                     minodummy:relevel(factor(wave), ref = "10") +  # Note: The base level is set for wave (ib10.wave). I don't know what this is for.
+                     sharedflat + person_capacity345 + bedrooms + bathrooms + appart + house_loft+couch + airbed + 
+                     sofa + futon+cabletv + wireless + heating + ac + elevator + handiaccess + doorman + fireplace + 
+                     washer + dryer + parking +gym + pool + buzzer + hottub + breakfast + family + events+people + 
+                     extrapeople + cancel_policy + smoking_allowed + pets_allowed+missingyear + missingcabletv + missingwireless + 
+                     missingheating + missingac + missingelevator + missinghandiaccess +missingdoorman + missingfireplace + 
+                     missingwasher + missingdryer + missingparking + missinggym + missingpool +missingbuzzer + missinghottub + 
+                     missingbreakfast + missingfamily + missingevents + missingcancel_policy +missingnoccur_pro_true + 
+                     missingverified_email + missingverified_phone + missingfacebook + missingverified_offline + missingsuperhost + 
+                     more_1_flat + year2009 + year2010 + year2011 + year2012 + year2013 + year2014 + year2015 + superhost + verified_email + 
+                     verified_offline + verified_phone + facebook + count_descrip + count_about + count_languages + count_rules + picture_count + 
+                     noccur_pro_true + change_pics + as.factor(citywaveID) | newid | 0 | newid , data=df[df$review <100,])
+
+model5.38s <- reduce_felm_object_size(model5.38)
+rm(model5.38);gc()
+
+# K < 120 incl. K = 0
+model5.39 <- felm( formula = log_price ~ lastrat7:rev100 + lastrat8:rev100 + lastrat9:rev100 + lastrat10:rev100 + minodummy:rev100 + 
+                     minodummy:relevel(factor(wave), ref = "10") +  # Note: The base level is set for wave (ib10.wave). I don't know what this is for.
+                     sharedflat + person_capacity345 + bedrooms + bathrooms + appart + house_loft+couch + airbed + 
+                     sofa + futon+cabletv + wireless + heating + ac + elevator + handiaccess + doorman + fireplace + 
+                     washer + dryer + parking +gym + pool + buzzer + hottub + breakfast + family + events+people + 
+                     extrapeople + cancel_policy + smoking_allowed + pets_allowed+missingyear + missingcabletv + missingwireless + 
+                     missingheating + missingac + missingelevator + missinghandiaccess +missingdoorman + missingfireplace + 
+                     missingwasher + missingdryer + missingparking + missinggym + missingpool +missingbuzzer + missinghottub + 
+                     missingbreakfast + missingfamily + missingevents + missingcancel_policy +missingnoccur_pro_true + 
+                     missingverified_email + missingverified_phone + missingfacebook + missingverified_offline + missingsuperhost + 
+                     more_1_flat + year2009 + year2010 + year2011 + year2012 + year2013 + year2014 + year2015 + superhost + verified_email + 
+                     verified_offline + verified_phone + facebook + count_descrip + count_about + count_languages + count_rules + picture_count + 
+                     noccur_pro_true + change_pics + as.factor(citywaveID) | newid | 0 | newid , data=df[df$review <120,])
+
+model5.39s <- reduce_felm_object_size(model5.39)
+rm(model5.39);gc()
+
+# K < 140 incl. K = 0
+model5.40 <- felm( formula = log_price ~ lastrat7:rev100 + lastrat8:rev100 + lastrat9:rev100 + lastrat10:rev100 + minodummy:rev100 + 
+                     minodummy:relevel(factor(wave), ref = "10") +  # Note: The base level is set for wave (ib10.wave). I don't know what this is for.
+                     sharedflat + person_capacity345 + bedrooms + bathrooms + appart + house_loft+couch + airbed + 
+                     sofa + futon+cabletv + wireless + heating + ac + elevator + handiaccess + doorman + fireplace + 
+                     washer + dryer + parking +gym + pool + buzzer + hottub + breakfast + family + events+people + 
+                     extrapeople + cancel_policy + smoking_allowed + pets_allowed+missingyear + missingcabletv + missingwireless + 
+                     missingheating + missingac + missingelevator + missinghandiaccess +missingdoorman + missingfireplace + 
+                     missingwasher + missingdryer + missingparking + missinggym + missingpool +missingbuzzer + missinghottub + 
+                     missingbreakfast + missingfamily + missingevents + missingcancel_policy +missingnoccur_pro_true + 
+                     missingverified_email + missingverified_phone + missingfacebook + missingverified_offline + missingsuperhost + 
+                     more_1_flat + year2009 + year2010 + year2011 + year2012 + year2013 + year2014 + year2015 + superhost + verified_email + 
+                     verified_offline + verified_phone + facebook + count_descrip + count_about + count_languages + count_rules + picture_count + 
+                     noccur_pro_true + change_pics + as.factor(citywaveID) | newid | 0 | newid , data=df[df$review <140,])
+
+model5.40s <- reduce_felm_object_size(model5.40)
+rm(model5.40);gc()
+
+# K > 0
+model5.41 <- felm( formula = log_price ~ lastrat7:rev100 + lastrat8:rev100 + lastrat9:rev100 + lastrat10:rev100 + minodummy:rev100 + 
+                     minodummy:relevel(factor(wave), ref = "10") +  # Note: The base level is set for wave (ib10.wave). I don't know what this is for.
+                     sharedflat + person_capacity345 + bedrooms + bathrooms + appart + house_loft+couch + airbed + 
+                     sofa + futon+cabletv + wireless + heating + ac + elevator + handiaccess + doorman + fireplace + 
+                     washer + dryer + parking +gym + pool + buzzer + hottub + breakfast + family + events+people + 
+                     extrapeople + cancel_policy + smoking_allowed + pets_allowed+missingyear + missingcabletv + missingwireless + 
+                     missingheating + missingac + missingelevator + missinghandiaccess +missingdoorman + missingfireplace + 
+                     missingwasher + missingdryer + missingparking + missinggym + missingpool +missingbuzzer + missinghottub + 
+                     missingbreakfast + missingfamily + missingevents + missingcancel_policy +missingnoccur_pro_true + 
+                     missingverified_email + missingverified_phone + missingfacebook + missingverified_offline + missingsuperhost + 
+                     more_1_flat + year2009 + year2010 + year2011 + year2012 + year2013 + year2014 + year2015 + superhost + verified_email + 
+                     verified_offline + verified_phone + facebook + count_descrip + count_about + count_languages + count_rules + picture_count + 
+                     noccur_pro_true + change_pics + as.factor(citywaveID) | newid | 0 | newid , data=df[df$review >0,])
+
+model5.41s <- reduce_felm_object_size(model5.41)
+rm(model5.41);gc()
+
 ### EXTENSION: TABLE 5 QUADRATIC-----
 ## K < 100 quadratic
 model5.314 <- felm( formula = log_price ~ lastrat7:rev100 + lastrat8:rev100 + lastrat9:rev100 + lastrat10:rev100 + minodummy:rev100 + 
@@ -467,13 +538,87 @@ model5.317 <- felm( formula = log_price ~ lastrat7:rev100 + lastrat8:rev100 + la
 model5.317s <- reduce_felm_object_size(model5.317)
 rm(model5.317);gc()
 
-models4 <- list(model5.34s,model5.35s,model5.36s,model5.37s)
-models5 <- list(model5.314s,model5.315s,model5.316s,model5.317s)
-K <- c("Number of Reviews","$K<100$","$K<120$","$K<140$","Full sample")
-s7 <- c("N obs. (3.5 stars)", "66,256","66,291","66,301","89,709")
-s8 <- c("N obs. (4 stars)","225,523","226,352","226,783","282,335")
-s9 <- c("N obs. (4.5 stars)","918,180","926,405","931,323","1,039,134")
-s10 <- c("N obs. (5 stars)","859,453","866,405","870,527","1,040,653")
+## K < 100 incl. K = 0 quadratic
+model5.318 <- felm( formula = log_price ~ lastrat7:rev100 + lastrat8:rev100 + lastrat9:rev100 + lastrat10:rev100 + minodummy:rev100 + 
+                      lastrat7:sqrev100 + lastrat8:sqrev100 + lastrat9:sqrev100 + lastrat10:sqrev100 + minodummy:sqrev100 +
+                      minodummy:relevel(factor(wave), ref = "10") +  # Note: The base level is set for wave (ib10.wave). I don't know what this is for.
+                      sharedflat + person_capacity345 + bedrooms + bathrooms + appart + house_loft+couch + airbed + 
+                      sofa + futon+cabletv + wireless + heating + ac + elevator + handiaccess + doorman + fireplace + 
+                      washer + dryer + parking +gym + pool + buzzer + hottub + breakfast + family + events+people + 
+                      extrapeople + cancel_policy + smoking_allowed + pets_allowed+missingyear + missingcabletv + missingwireless + 
+                      missingheating + missingac + missingelevator + missinghandiaccess +missingdoorman + missingfireplace + 
+                      missingwasher + missingdryer + missingparking + missinggym + missingpool +missingbuzzer + missinghottub + 
+                      missingbreakfast + missingfamily + missingevents + missingcancel_policy +missingnoccur_pro_true + 
+                      missingverified_email + missingverified_phone + missingfacebook + missingverified_offline + missingsuperhost + 
+                      more_1_flat + year2009 + year2010 + year2011 + year2012 + year2013 + year2014 + year2015 + superhost + verified_email + 
+                      verified_offline + verified_phone + facebook + count_descrip + count_about + count_languages + count_rules + picture_count + 
+                      noccur_pro_true + change_pics + as.factor(citywaveID) | newid | 0 | newid , data=df[df$review <100,])
+model5.318s <- reduce_felm_object_size(model5.318)
+rm(model5.318);gc()
+
+## K < 120 incl. K = 0 quadratic
+model5.319 <- felm( formula = log_price ~ lastrat7:rev100 + lastrat8:rev100 + lastrat9:rev100 + lastrat10:rev100 + minodummy:rev100 + 
+                      lastrat7:sqrev100 + lastrat8:sqrev100 + lastrat9:sqrev100 + lastrat10:sqrev100 + minodummy:sqrev100 +
+                      minodummy:relevel(factor(wave), ref = "10") +  # Note: The base level is set for wave (ib10.wave). I don't know what this is for.
+                      sharedflat + person_capacity345 + bedrooms + bathrooms + appart + house_loft+couch + airbed + 
+                      sofa + futon+cabletv + wireless + heating + ac + elevator + handiaccess + doorman + fireplace + 
+                      washer + dryer + parking +gym + pool + buzzer + hottub + breakfast + family + events+people + 
+                      extrapeople + cancel_policy + smoking_allowed + pets_allowed+missingyear + missingcabletv + missingwireless + 
+                      missingheating + missingac + missingelevator + missinghandiaccess +missingdoorman + missingfireplace + 
+                      missingwasher + missingdryer + missingparking + missinggym + missingpool +missingbuzzer + missinghottub + 
+                      missingbreakfast + missingfamily + missingevents + missingcancel_policy +missingnoccur_pro_true + 
+                      missingverified_email + missingverified_phone + missingfacebook + missingverified_offline + missingsuperhost + 
+                      more_1_flat + year2009 + year2010 + year2011 + year2012 + year2013 + year2014 + year2015 + superhost + verified_email + 
+                      verified_offline + verified_phone + facebook + count_descrip + count_about + count_languages + count_rules + picture_count + 
+                      noccur_pro_true + change_pics + as.factor(citywaveID) | newid | 0 | newid , data=df[df$review <120,])
+model5.319s <- reduce_felm_object_size(model5.319)
+rm(model5.319);gc()
+
+## K < 140 incl. K = 0 quadratic
+model5.320 <- felm( formula = log_price ~ lastrat7:rev100 + lastrat8:rev100 + lastrat9:rev100 + lastrat10:rev100 + minodummy:rev100 + 
+                      lastrat7:sqrev100 + lastrat8:sqrev100 + lastrat9:sqrev100 + lastrat10:sqrev100 + minodummy:sqrev100 +
+                      minodummy:relevel(factor(wave), ref = "10") +  # Note: The base level is set for wave (ib10.wave). I don't know what this is for.
+                      sharedflat + person_capacity345 + bedrooms + bathrooms + appart + house_loft+couch + airbed + 
+                      sofa + futon+cabletv + wireless + heating + ac + elevator + handiaccess + doorman + fireplace + 
+                      washer + dryer + parking +gym + pool + buzzer + hottub + breakfast + family + events+people + 
+                      extrapeople + cancel_policy + smoking_allowed + pets_allowed+missingyear + missingcabletv + missingwireless + 
+                      missingheating + missingac + missingelevator + missinghandiaccess +missingdoorman + missingfireplace + 
+                      missingwasher + missingdryer + missingparking + missinggym + missingpool +missingbuzzer + missinghottub + 
+                      missingbreakfast + missingfamily + missingevents + missingcancel_policy +missingnoccur_pro_true + 
+                      missingverified_email + missingverified_phone + missingfacebook + missingverified_offline + missingsuperhost + 
+                      more_1_flat + year2009 + year2010 + year2011 + year2012 + year2013 + year2014 + year2015 + superhost + verified_email + 
+                      verified_offline + verified_phone + facebook + count_descrip + count_about + count_languages + count_rules + picture_count + 
+                      noccur_pro_true + change_pics + as.factor(citywaveID) | newid | 0 | newid , data=df[df$review <140,])
+model5.320s <- reduce_felm_object_size(model5.320)
+rm(model5.320);gc()
+
+## K > 0 quadratic
+model5.321 <- felm( formula = log_price ~ lastrat7:rev100 + lastrat8:rev100 + lastrat9:rev100 + lastrat10:rev100 + minodummy:rev100 + 
+                      lastrat7:sqrev100 + lastrat8:sqrev100 + lastrat9:sqrev100 + lastrat10:sqrev100 + minodummy:sqrev100 +
+                      minodummy:relevel(factor(wave), ref = "10") +  # Note: The base level is set for wave (ib10.wave). I don't know what this is for.
+                      sharedflat + person_capacity345 + bedrooms + bathrooms + appart + house_loft+couch + airbed + 
+                      sofa + futon+cabletv + wireless + heating + ac + elevator + handiaccess + doorman + fireplace + 
+                      washer + dryer + parking +gym + pool + buzzer + hottub + breakfast + family + events+people + 
+                      extrapeople + cancel_policy + smoking_allowed + pets_allowed+missingyear + missingcabletv + missingwireless + 
+                      missingheating + missingac + missingelevator + missinghandiaccess +missingdoorman + missingfireplace + 
+                      missingwasher + missingdryer + missingparking + missinggym + missingpool +missingbuzzer + missinghottub + 
+                      missingbreakfast + missingfamily + missingevents + missingcancel_policy +missingnoccur_pro_true + 
+                      missingverified_email + missingverified_phone + missingfacebook + missingverified_offline + missingsuperhost + 
+                      more_1_flat + year2009 + year2010 + year2011 + year2012 + year2013 + year2014 + year2015 + superhost + verified_email + 
+                      verified_offline + verified_phone + facebook + count_descrip + count_about + count_languages + count_rules + picture_count + 
+                      noccur_pro_true + change_pics + as.factor(citywaveID) | newid | 0 | newid , data=df[df$review > 0,])
+model5.321s <- reduce_felm_object_size(model5.321)
+rm(model5.321);gc()
+
+models4 <- list(model5.34s,model5.35s,model5.36s,model5.41s,model5.38s,model5.39s,model5.40s,model5.37s)
+models5 <- list(model5.314s,model5.315s,model5.316s,model5.321s,model5.318s,model5.319s,model5.320s,model5.317s)
+
+K <- c("Number of Reviews","$0<K<100$","$0<K<120$","$0<K<140$","$0<K$","$K<100$","$K<120$","$K<140$","Full sample")
+s7 <- c("N obs. (3.5 stars)", "66,256","66,291","66,301","66,313","89,652","89,687","89,697","89,709")
+s8 <- c("N obs. (4 stars)","225,523","226,352","226,783","227,357","280,501","281,330","281,761","282,335")
+s9 <- c("N obs. (4.5 stars)","918,180","926,405","931,323","939,438","1,017,876","1,026,101","1,031,019","1,039,134")
+s10 <- c("N obs. (5 stars)","859,453","866,405","870,527","878,322","1,021,784","1,028,736","1,032,858","1,040,653")
+
 stargazer(models4, type = "latex", keep = c("lastrat7:rev100","rev100:lastrat8","lastrat78:rev100","rev100:lastrat9","rev100:lastrat10","rev100:minodummy"),
           add.lines = list(K,s7,s8,s9,s10))
 stargazer(models5, type = "latex", keep = c("lastrat7:rev100","rev100:lastrat8","lastrat78:rev100","rev100:lastrat9","rev100:lastrat10","rev100:minodummy",
@@ -674,3 +819,14 @@ ggplot(dat,aes(x=dd,y=ffe,linetype=Rating, colour=Group)) +
   geom_line() + 
   labs(x="Number of reviews",y="Relative price") + 
   theme_bw(base_size=15) + facet_wrap(~Group,nrow = 2) + theme_bw()
+
+### QUANTILE
+tmp <- quantile(df$review, probs = c(5,10,20,30,40,50,60,70,80,90,100)/100)
+tmp1 <- df %>% filter(review > 0)
+tmp2 <- quantile(tmp1$review, probs = c(5,10,20,30,40,50,60,70,80,90,100)/100)
+df_quantiles <- matrix(c(tmp,tmp2),nrow=2,byrow=TRUE)
+df_quantiles <- as.data.frame(df_quantiles)
+names(df_quantiles) <- c("5%","10%","20%","30%","40%","50%","60%","70%","80%","90%","100%")
+row.names(df_quantiles) <- c("$K > 0$","Full sample")
+rm(tmp,tmp1,tmp2)
+stargazer(df_quantiles,type="latex",summary = FALSE)
